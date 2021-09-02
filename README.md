@@ -54,6 +54,8 @@ There are some defines to adapt the code to your needs:
 
 The first group defines the actual hardware pins. Connect DIN of your LED strip to PIXEL_PIN, the encoder wires (SD and CLK) to the encoder pins. If the encoder "rotates" in thw wrong direction, switch the two pins. The decoder has also a pin for the switch, which has to be connected to BUTTON_PIN.
 
+NOTE: The encoder PINs need to be interrupt-capable. So only 2 and 3 is e.g. possible on my old Nano board. Please check the Arduino documentation for this.
+
 The second group defines the layout of the LEDs. I use 10 rotary PCB with 8 LEDs on it, so RL_LED_PER_ROTARY is the number of LEDs per PCB and RL_NUM_ROTARIES is the number of PCBs or slots on your BottleBoard.
 
 ## How to use
@@ -83,7 +85,7 @@ You can switch the device on and off at any time by switching the power. The con
 
 You will need:
 
-- KY-040 Rotary Encoder
+- KY-040 Rotary encoder
 - 470 Ohm resitor
 - Arduino Nano
 - Some 5050 / WS2812B LEDs
