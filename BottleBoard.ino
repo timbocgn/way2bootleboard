@@ -568,9 +568,6 @@ void SaveConfig(void)
 
 void setup()
 {
-
-#ifdef DEBUG
-   
   // ---- setup serial library
 
   Serial.begin(115200);
@@ -578,8 +575,6 @@ void setup()
     ;
 
   DEBUG_LOG("Bottle Board v1.0 - may the light be with you\n");
-
-#endif
 
   // ---- init rotary library
 
