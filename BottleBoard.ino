@@ -56,7 +56,7 @@
 
 // ---- hardware definitons
 
-#define RL_LED_PER_ROTARY 3
+#define RL_LED_PER_ROTARY 8
 #define RL_NUM_ROTARIES 10
 
 // ---- if you want some output on the serial, remove the comments
@@ -446,14 +446,13 @@ void SetBrightness(int f_b,bool f_force = false)
 {
   if ( (g_current_brighness != f_b) || f_force)
   {
-      Serial.print("New brightness ");
-      Serial.println(f_b);
+      DEBUG_LOG("New brightness %d  Forced? %d\n",f_b,f_force);
       
       g_pixels->setBrightness(f_b);     
 
       g_current_brighness = f_b;
       
-      SetNormEncPos(g_current_brighness / 8);
+      SetNormEncPos( (g_current_brighness-5) / 10);
 
       // --- save the setup on the next event
       
@@ -763,11 +762,11 @@ void OnBrightnessChanged(void)
 {
     // ---- get the encoder position
     
-    int newPos = GetNormEncPos(31);
+    int newPos = GetNormEncPos(25);
 
     // ---- and set the brightness
 
-    SetBrightness(newPos*8);
+    SetBrightness(newPos*10+5);
 }
 
 // -----------------------------------------------------------------------------------------------------------------------------
@@ -911,6 +910,9 @@ void loop()
 
     if (g_selected_rl_idx != newPos)
     {    
+
+      DEBUG_LOG("Select new light %d, old light %d\n",newPos,g_selected_rl_idx);
+      
       // --- switch the current selection off and the new selection on
       
       g_Lights[g_selected_rl_idx].SetMode(CRotaryLight::rls_Backout);
